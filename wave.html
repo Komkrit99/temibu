@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+
+<body>
+
+  <div>
+    <button id='stbtn'>forward from left</button>
+    <button id='stbtn2'>forward from middle</button>
+    <button id='stbtn3'>backward from left</button>
+    <button id='stbtn4'>backward from middle</button>
+    <button id='stbtn5'>rotate to princess</button>
+    <button id='stbtn6'>rotate back</button>
+
+  </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-analytics.js";
+  import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-database.js";
+  import { collection, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
+
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB3QYKLd6XRMCyHh6DL9_c5HGfOynYXlqI",
+    authDomain: "burs-3d243.firebaseapp.com",
+    databaseURL: "https://burs-3d243-default-rtdb.firebaseio.com",
+    projectId: "burs-3d243",
+    storageBucket: "burs-3d243.appspot.com",
+    messagingSenderId: "892325446937",
+    appId: "1:892325446937:web:abe1c0a2a36bb63db67188",
+    measurementId: "G-N3WNH571S2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase();
+  const read_ste = ref(db, 'info/status/');
+  // onValue(read_ste, (snapshot) => {
+  //   const ste_dada = snapshot.val();
+  //   if (ste_dada.temi1 == 'complete') {
+  //     console.log(ste_dada.temi1)
+  //   }
+  // }
+  //   , { onlyOnce: false });
+
+  function temi(temi, command) {
+
+    let obj = {}
+    obj['message/' + temi] = command
+    update(ref(db), obj);
+  }
+
+
+  function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+
+  function start_temi() {
+    console.log(document.getElementById('t101').value)
+    // set(doc(db,'info/status/'),{temi1:document.getElementById('t101').value})
+  }
+  function ste_done() {
+    set(ref(db, 'info/status/'), {
+      temi1: 'none ',
+      temi2: 'none ',
+      temi3: 'none ',
+      temi4: 'none ',
+      temi5: 'none ',
+      temi6: 'none '
+    })
+  }
+  document.getElementById('stbtn').addEventListener('click', () => {
+    alert('start')
+    ste_done()
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi1', 'move s31')
+      if (ste_dada.temi1 == 'complete') {
+        temi('temi2', 'move s22')
+        if (ste_dada.temi2 == 'complete') {
+          temi('temi3', 'move s33')
+          if (ste_dada.temi3 == 'complete') {
+            temi('temi4', 'move s34')
+            if (ste_dada.temi4 == 'complete') {
+              temi('temi6', 'move s53')
+              if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
+                      ste_done()
+              }
+            }
+          }
+        }
+      }
+    }
+      , { onlyOnce: false });
+  });
+  document.getElementById('stbtn2').addEventListener('click', () => {
+    alert('start')
+    ste_done()
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi3', 'move s33')
+      if (ste_dada.temi3 == 'complete') {
+        temi('temi2', 'move s22')
+        temi('temi4', 'move s34')
+        if (ste_dada.temi2 == 'complete') {
+          temi('temi6', 'move s53')
+          temi('temi1', 'move s31')
+          if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
+                      ste_done()
+              }
+        }
+      }
+    }
+      , { onlyOnce: false });
+  });
+  document.getElementById('stbtn3').addEventListener('click', () => {
+    alert('start')
+    ste_done()
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi1', 'mover s11')
+      if (ste_dada.temi1 == 'complete') {
+        temi('temi2', 'mover s12')
+        if (ste_dada.temi2 == 'complete') {
+          temi('temi3', 'mover s13')
+          if (ste_dada.temi3 == 'complete') {
+            temi('temi4', 'mover s14')
+            if (ste_dada.temi4 == 'complete') {
+              temi('temi6', 'mover s15')
+              if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
+                ste_done()
+              }
+            }
+          }
+        }
+      }
+    }
+      , { onlyOnce: false });
+  });
+  document.getElementById('stbtn4').addEventListener('click', () => {
+    alert('start')
+    ste_done()
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi3', 'mover s13')
+      if (ste_dada.temi3 == 'complete') {
+        temi('temi2', 'mover s12')
+        temi('temi4', 'mover s14')
+        if (ste_dada.temi2 == 'complete') {
+          temi('temi6', 'mover s15')
+          temi('temi1', 'mover s11')
+          if (ste_dada.temi6 == 'complete') {
+                      ste_done()
+              }
+        }
+      }
+    }
+      , { onlyOnce: false });
+  });
+  document.getElementById('stbtn5').addEventListener('click', () => {
+    alert('start')
+    ste_done()
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi6', 'rotation 45')
+      temi('temi4', 'rotation 45')
+      temi('temi1', 'rotation -45')
+      temi('temi2', 'rotation -45')
+          if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
+                      ste_done()
+              }
+    }
+      , { onlyOnce: false });
+  });  document.getElementById('stbtn6').addEventListener('click', () => {
+    alert('start')
+    ste_done()
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi6', 'rotation -45')
+      temi('temi4', 'rotation -45')
+      temi('temi1', 'rotation 45')
+      temi('temi2', 'rotation 45')
+          if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
+                      ste_done()
+              }
+    }
+      , { onlyOnce: false });
+  });
+</script>
+
+</html>
