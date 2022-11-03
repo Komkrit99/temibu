@@ -11,7 +11,7 @@
 <style>
   .btn{
   width: 200px;
-    hieght : 70px;
+    height: 70px;
   }
 </style>
 <body>
@@ -57,6 +57,15 @@
   //   }
   // }
   //   , { onlyOnce: false });
+function bth_dis(ste){
+  document.getElementById('stbtn').disabled = ste;  
+               document.getElementById('stbtn2').disabled = ste;    
+               document.getElementById('stbtn3').disabled = ste;    
+               document.getElementById('stbtn4').disabled = ste;    
+               document.getElementById('stbtn5').disabled = ste;    
+               document.getElementById('stbtn6').disabled = ste;  
+}
+       
 
   function temi(temi, command) {
 
@@ -87,6 +96,7 @@
   document.getElementById('stbtn').addEventListener('click', () => {
     alert('start')
     ste_done()
+    bth_dis(true)
     const read_ste = ref(db, 'info/status/');
     onValue(read_ste, (snapshot) => {
       const ste_dada = snapshot.val();
@@ -101,6 +111,7 @@
               temi('temi6', 'move s53')
               if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
                       ste_done()
+                      bth_dis(false)
               }
             }
           }
@@ -112,6 +123,7 @@
   document.getElementById('stbtn2').addEventListener('click', () => {
     alert('start')
     ste_done()
+    bth_dis(true)
     const read_ste = ref(db, 'info/status/');
     onValue(read_ste, (snapshot) => {
       const ste_dada = snapshot.val();
@@ -124,6 +136,7 @@
           temi('temi1', 'move s31')
           if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
                       ste_done()
+                      bth_dis(false)
               }
         }
       }
@@ -133,6 +146,7 @@
   document.getElementById('stbtn3').addEventListener('click', () => {
     alert('start')
     ste_done()
+    bth_dis(true)
     const read_ste = ref(db, 'info/status/');
     onValue(read_ste, (snapshot) => {
       const ste_dada = snapshot.val();
@@ -147,6 +161,7 @@
               temi('temi6', 'mover s15')
               if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
                 ste_done()
+                bth_dis(false)
               }
             }
           }
@@ -158,6 +173,7 @@
   document.getElementById('stbtn4').addEventListener('click', () => {
     alert('start')
     ste_done()
+    bth_dis(true)
     const read_ste = ref(db, 'info/status/');
     onValue(read_ste, (snapshot) => {
       const ste_dada = snapshot.val();
@@ -170,6 +186,7 @@
           temi('temi1', 'mover s11')
           if (ste_dada.temi6 == 'complete') {
                       ste_done()
+                      bth_dis(false)
               }
         }
       }
@@ -179,6 +196,7 @@
   document.getElementById('stbtn5').addEventListener('click', () => {
     alert('start')
     ste_done()
+    bth_dis(true)
     const read_ste = ref(db, 'info/status/');
     onValue(read_ste, (snapshot) => {
       const ste_dada = snapshot.val();
@@ -188,12 +206,14 @@
       temi('temi2', 'rotation -45')
           if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
                       ste_done()
+                      bth_dis(false)
               }
     }
       , { onlyOnce: false });
   });  document.getElementById('stbtn6').addEventListener('click', () => {
     alert('start')
     ste_done()
+    bth_dis(true)
     const read_ste = ref(db, 'info/status/');
     onValue(read_ste, (snapshot) => {
       const ste_dada = snapshot.val();
@@ -203,6 +223,7 @@
       temi('temi2', 'rotation 45')
           if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
                       ste_done()
+                      bth_dis(false)
               }
     }
       , { onlyOnce: false });
