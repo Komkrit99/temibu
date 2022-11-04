@@ -18,6 +18,9 @@
 
   <div>
     <button class="btn" id='stbtn'>forward from left</button>
+    <button class="btn" id='stbtn1'>go home</button>
+    <button class="btn" id='stbtn11'>face rorate up</button>
+    <button class="btn" id='stbtn12'>go up</button>
     <button class="btn" id='stbtn2'>forward from middle</button>
     <button class="btn" id='stbtn3'>backward from left</button>
     <button class="btn" id='stbtn4'>backward from middle</button>
@@ -57,8 +60,17 @@
   //   }
   // }
   //   , { onlyOnce: false });
+  onValue(read_ste, (snapshot) => {
+    if (read_ste.temi1 == 'complete' && read_ste.temi2 == 'complete' && read_ste.temi3 == 'complete'  && read_ste.temi4 == 'complete'  && read_ste.temi6 == 'complete') {
+                      console.log(read_ste)
+                      bth_dis(false)
+              }
+  })
+
+            
 function bth_dis(ste){
   document.getElementById('stbtn').disabled = ste;  
+               document.getElementById('stbtn1').disabled = ste;
                document.getElementById('stbtn2').disabled = ste;    
                document.getElementById('stbtn3').disabled = ste;    
                document.getElementById('stbtn4').disabled = ste;    
@@ -109,16 +121,70 @@ function bth_dis(ste){
             temi('temi4', 'move s34')
             if (ste_dada.temi4 == 'complete') {
               temi('temi6', 'move s53')
-              if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
-                      ste_done()
-                      bth_dis(false)
-              }
-            }
+
           }
         }
       }
     }
-      , { onlyOnce: false });
+  }
+      , { onlyOnce: true });
+  });
+  document.getElementById('stbtn1').addEventListener('click', () => {
+    // alert('start')
+    ste_done()
+    // bth_dis(true)
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi1', 'mover s11')
+      temi('temi2', 'mover s12')
+      temi('temi3', 'mover s13')
+      temi('temi4', 'mover s14')
+      temi('temi6', 'mover s15')
+  }
+      , { onlyOnce: true });
+  });
+  document.getElementById('stbtn11').addEventListener('click', () => {
+    // alert('start')
+    ste_done()
+    // bth_dis(true)
+    var turn = true
+
+  setInterval(()=>{
+    turn = !turn
+    if(turn){
+      temi('temi1', 'face_rotation 0')
+      temi('temi2', 'face_rotation 0')
+      temi('temi3', 'face_rotation 0')
+      temi('temi4', 'face_rotation 0')
+      temi('temi6', 'face_rotation 0')
+    }else{
+
+      temi('temi1', 'face_rotation 90')
+      temi('temi2', 'face_rotation 90')
+      temi('temi3', 'face_rotation 90')
+      temi('temi4', 'face_rotation 90')
+      temi('temi6', 'face_rotation 90')
+    }
+  },2000)
+  });
+
+
+
+  document.getElementById('stbtn12').addEventListener('click', () => {
+    // alert('start')
+    ste_done()
+    // bth_dis(true)
+    const read_ste = ref(db, 'info/status/');
+    onValue(read_ste, (snapshot) => {
+      const ste_dada = snapshot.val();
+      temi('temi1', 'move s31')
+      temi('temi2', 'move s22')
+      temi('temi3', 'move s33')
+      temi('temi4', 'move s34')
+      temi('temi6', 'move s53')
+  }
+      , { onlyOnce: true });
   });
   document.getElementById('stbtn2').addEventListener('click', () => {
     alert('start')
@@ -134,14 +200,11 @@ function bth_dis(ste){
         if (ste_dada.temi2 == 'complete') {
           temi('temi6', 'move s53')
           temi('temi1', 'move s31')
-          if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
-                      ste_done()
-                      bth_dis(false)
-              }
+
         }
       }
     }
-      , { onlyOnce: false });
+      , { onlyOnce: true });
   });
   document.getElementById('stbtn3').addEventListener('click', () => {
     alert('start')
@@ -159,16 +222,12 @@ function bth_dis(ste){
             temi('temi4', 'mover s14')
             if (ste_dada.temi4 == 'complete') {
               temi('temi6', 'mover s15')
-              if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete' && ste_dada.temi3 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
-                ste_done()
-                bth_dis(false)
-              }
             }
           }
         }
       }
     }
-      , { onlyOnce: false });
+      , { onlyOnce: true });
   });
   document.getElementById('stbtn4').addEventListener('click', () => {
     alert('start')
@@ -191,7 +250,7 @@ function bth_dis(ste){
         }
       }
     }
-      , { onlyOnce: false });
+      , { onlyOnce: true });
   });
   document.getElementById('stbtn5').addEventListener('click', () => {
     alert('start')
@@ -204,12 +263,9 @@ function bth_dis(ste){
       temi('temi4', 'rotation 45')
       temi('temi1', 'rotation -45')
       temi('temi2', 'rotation -45')
-          if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
-                      ste_done()
-                      bth_dis(false)
-              }
+
     }
-      , { onlyOnce: false });
+      , { onlyOnce: true });
   });  document.getElementById('stbtn6').addEventListener('click', () => {
     alert('start')
     ste_done()
@@ -221,12 +277,9 @@ function bth_dis(ste){
       temi('temi4', 'rotation -45')
       temi('temi1', 'rotation 45')
       temi('temi2', 'rotation 45')
-          if (ste_dada.temi1 == 'complete' && ste_dada.temi2 == 'complete'  && ste_dada.temi4 == 'complete'  && ste_dada.temi6 == 'complete') {
-                      ste_done()
-                      bth_dis(false)
-              }
+
     }
-      , { onlyOnce: false });
+      , { onlyOnce: true });
   });
 </script>
 
